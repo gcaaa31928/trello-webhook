@@ -4,5 +4,3 @@ gunicorn
 tinydb
 requests
 flask-cors
-goslate
-textblob

@@ -14,6 +14,7 @@ CORS(app)
 def callback():
     body = request.get_data(as_text=True)
     print(body)
+    return 'OK'
 
 if __name__ == "__main__":
     app.run(host='127.0.0.1', port=5000)
