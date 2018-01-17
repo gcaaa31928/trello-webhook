@@ -14,9 +14,11 @@ const requestHandler = (req, response) => {
 	if (req.method == 'POST') {
 		var body = '';
 		req.on('data', function (data) {
+			body += data;
+		});
+		req.on('end', function () {
 			try {
-				console.log(data);
-				data = JSON.parse(data);
+				var data = JSON.parse(body);
 				var data = data["action"]["data"];
 				var card = data["card"];
 				if (data["listAfter"]["name"] == "完成") {
@@ -25,8 +27,6 @@ const requestHandler = (req, response) => {
 			} catch (err) {
 				console.log(err);
 			}
-		});
-		req.on('end', function () {
 		});
 	}
 	response.end('Hello Node.js Server!')
