@@ -25,7 +25,7 @@ const requestHandler = (req, response) => {
 				var entities = data["action"]["display"]["entities"];
 				var data = data["action"]["data"];
 				var card = data["card"];
-				if (isDone(data["list"]["name"])) {
+				if (isDone(data["listAfter"]["name"])) {
 					postMessage(`${card["name"]} 已經完成，完成者為 ${entities['memberCreator']['text']}`);
 				}
 			} catch (err) {
