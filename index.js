@@ -11,19 +11,21 @@ const postMessage = (message) => {
 }
 const requestHandler = (req, response) => {
 	console.dir(req.param);
-
-	if (req.method == 'POST') {
-		console.log("POST");
-		var body = '';
-		req.on('data', function (data) {
-			var data = data["action"]["data"];
-			var card = data["card"];
-			if (data["listAfter"]["name"] == "完成") {
-				postMessage(`${card["name"]} 已經完成 !!`);
-			}
-		});
-		req.on('end', function () {
-		});
+	try {
+		if (req.method == 'POST') {
+			console.log("POST");
+			var body = '';
+			req.on('data', function (data) {
+				var data = data["action"]["data"];
+				var card = data["card"];
+				if (data["listAfter"]["name"] == "完成") {
+					postMessage(`${card["name"]} 已經完成 !!`);
+				}
+			});
+			req.on('end', function () {
+			});
+		}
+	} catch (err) {
 	}
 	response.end('Hello Node.js Server!')
 }
