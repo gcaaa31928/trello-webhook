@@ -1,6 +1,14 @@
 const http = require('http')
 const port = process.env.PORT || 3000
 
+
+const request = require('request');
+
+const postMessage = (message) => {
+	var payload=`{"text": "${message}"}`;
+	request.post('https://chat.synology.com/webapi/entry.cgi?api=SYNO.Chat.External&method=incoming&version=2&token=%22tkElWrrctM0kmjFu1oX4r3IJJoDgQ79NbtGkirgH2DdR26ubpigNKGfrFu1jrC61%22').form({payload: payload});
+
+}
 const requestHandler = (req, response) => {
 	console.dir(req.param);
 
@@ -8,11 +16,13 @@ const requestHandler = (req, response) => {
 		console.log("POST");
 		var body = '';
 		req.on('data', function (data) {
-			body += data;
-			console.log("Partial body: " + body);
+			var data = data["action"]["data"];
+			var card = data["card"];
+			if (data["listAfter"]["name"] == "完成") {
+				postMessage(`${card["name"]} 已經完成 !!`);
+			}
 		});
 		req.on('end', function () {
-			console.log("Body: " + body);
 		});
 	}
 	response.end('Hello Node.js Server!')
