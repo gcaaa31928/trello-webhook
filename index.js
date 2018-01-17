@@ -1,6 +1,5 @@
 const http = require('http')
 const port = process.env.PORT || 3000
-var qs = require('querystring');
 
 const request = require('request');
 
@@ -21,13 +20,13 @@ const requestHandler = (req, response) => {
 		});
 		req.on('end', function () {
 			try {
-				console.log('in', data);
 				var data = JSON.parse(body);
+				console.log('in', data);
 				var entities = data["action"]["display"]["entities"];
 				var data = data["action"]["data"];
 				var card = data["card"];
 				if (isDone(data["list"]["name"])) {
-					postMessage(`${card["name"]} 已經完成 ， 完成者為 ${entities['memberCreator']['text']}`);
+					postMessage(`${card["name"]} 已經完成，完成者為 ${entities['memberCreator']['text']}`);
 				}
 			} catch (err) {
 				console.log(err);
