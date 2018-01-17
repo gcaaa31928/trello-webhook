@@ -15,6 +15,7 @@ const requestHandler = (req, response) => {
 		var body = '';
 		req.on('data', function (data) {
 			try {
+				console.log(data);
 				data = JSON.parse(data);
 				var data = data["action"]["data"];
 				var card = data["card"];
