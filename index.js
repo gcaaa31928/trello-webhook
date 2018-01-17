@@ -23,11 +23,11 @@ const requestHandler = (req, response) => {
 		req.on('end', function () {
 			try {
 				var data = JSON.parse(body);
-				var display = data["action"]["display"];
+				var entities = data["action"]["display"]["entities"];
 				var data = data["action"]["data"];
 				var card = data["card"];
 				if (isDone(data["listAfter"]["name"])) {
-					postMessage(`${card["name"]} 已經完成 ， 完成者為 ${display['memberCreator']['text']}`);
+					postMessage(`${card["name"]} 已經完成 ， 完成者為 ${entities['memberCreator']['text']}`);
 				}
 			} catch (err) {
 				console.log(err);
