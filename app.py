@@ -16,7 +16,7 @@ def callback():
         body = request.get_data(as_text=True)
         action = body['action']['data']
         if action['listAfter']['name'] == '完成':
-            print('{} 已經完成 {}'.format(body['action']['display']['entities']['memberCreator']['text'], action['card']['name'])
+            print('{} 已經完成 {}'.format(body['action']['display']['entities']['memberCreator']['text'], action['card']['name']))
 
         print(body)
     except:
