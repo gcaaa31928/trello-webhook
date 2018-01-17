@@ -13,12 +13,11 @@ CORS(app)
 @app.route("/", methods=['POST'])
 def callback():
     try:
-        body = request.get_data(as_text=True)
+        body = request.get_json()
+        print(body)
         action = body['action']['data']
         if action['listAfter']['name'] == '完成':
             print('{} 已經完成 {}'.format(body['action']['display']['entities']['memberCreator']['text'], action['card']['name']))
-
-        print(body)
     except:
         print(sys.exc_info()[0])
     return 'OK'
