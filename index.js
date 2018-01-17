@@ -14,27 +14,27 @@ const isDone = (name) => {
 }
 const requestHandler = (req, response) => {
 	if (req.method == 'POST') {
-		var body = '';
+		var body = '', entities, data, card, cardName;
 		req.on('data', function (data) {
 			body += data;
 		});
 		req.on('end', function () {
 			try {
-				var data = JSON.parse(body);
+				data = JSON.parse(body);
 				console.log('in', data);
-				var entities = data["action"]["display"]["entities"];
-				var data = data["action"]["data"];
-				var card = data["card"];
-				var cardName = ("listAfter" in data) ? data["listAfter"]["name"] : data["list"]["name"];
-				if (isDone(cardName)) {
-					postMessage(`${card["name"]} 已經完成，完成者為 ${entities['memberCreator']['text']}`);
-				}
+				entities = data["action"]["display"]["entities"];
+				data = data["action"]["data"];
+				card = data["card"];
+				cardName = ("listAfter" in data) ? data["listAfter"]["name"] : data["list"]["name"];
 			} catch (err) {
 				console.log(err);
 			}
 		});
 	}
 	response.end('Hello Node.js Server!')
+	if (isDone(cardName)) {
+		postMessage(`${card["name"]} 已經完成，完成者為 ${entities['memberCreator']['text']}`);
+	}
 }
 
 const server = http.createServer(requestHandler)
