@@ -22,6 +22,7 @@ const requestHandler = (req, response) => {
 		});
 		req.on('end', function () {
 			try {
+				console.log(body);
 				var data = JSON.parse(body);
 				var entities = data["action"]["display"]["entities"];
 				var data = data["action"]["data"];
