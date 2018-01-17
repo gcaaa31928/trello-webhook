@@ -1,6 +1,6 @@
 const http = require('http')
 const port = process.env.PORT || 3000
-
+var qs = require('querystring');
 
 const request = require('request');
 
@@ -14,7 +14,6 @@ const isDone = (name) => {
 	return name === "完成" || name === "Done";
 }
 const requestHandler = (req, response) => {
-	console.dir(req.param);
 	if (req.method == 'POST') {
 		var body = '';
 		req.on('data', function (data) {
@@ -22,7 +21,7 @@ const requestHandler = (req, response) => {
 		});
 		req.on('end', function () {
 			try {
-				console.log(body);
+				console.log('in', data);
 				var data = JSON.parse(body);
 				var entities = data["action"]["display"]["entities"];
 				var data = data["action"]["data"];
