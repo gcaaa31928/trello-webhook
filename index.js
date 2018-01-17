@@ -22,6 +22,7 @@ const requestHandler = (req, response) => {
 					postMessage(`${card["name"]} 已經完成 !!`);
 				}
 			} catch (err) {
+				console.log(err);
 			}
 		});
 		req.on('end', function () {
