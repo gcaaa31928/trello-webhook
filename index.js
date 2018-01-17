@@ -16,6 +16,7 @@ const requestHandler = (req, response) => {
 			console.log("POST");
 			var body = '';
 			req.on('data', function (data) {
+				data = JSON.parse(data);
 				var data = data["action"]["data"];
 				var card = data["card"];
 				if (data["listAfter"]["name"] == "完成") {
