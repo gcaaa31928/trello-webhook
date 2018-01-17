@@ -9,6 +9,10 @@ const postMessage = (message) => {
 	request.post('https://chat.synology.com/webapi/entry.cgi?api=SYNO.Chat.External&method=incoming&version=2&token=%22tkElWrrctM0kmjFu1oX4r3IJJoDgQ79NbtGkirgH2DdR26ubpigNKGfrFu1jrC61%22').form({payload: payload});
 
 }
+
+const isDone = (name) => {
+	return name === "完成" || name === "Done";
+}
 const requestHandler = (req, response) => {
 	console.dir(req.param);
 	if (req.method == 'POST') {
@@ -19,10 +23,11 @@ const requestHandler = (req, response) => {
 		req.on('end', function () {
 			try {
 				var data = JSON.parse(body);
+				var display = data["action"]["display"];
 				var data = data["action"]["data"];
 				var card = data["card"];
-				if (data["listAfter"]["name"] == "完成") {
-					postMessage(`${card["name"]} 已經完成 !!`);
+				if (isDone(data["listAfter"]["name"])) {
+					postMessage(`${card["name"]} 已經完成 ， 完成者為 ${display['memberCreator']['text']}`);
 				}
 			} catch (err) {
 				console.log(err);
