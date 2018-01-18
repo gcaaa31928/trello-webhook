@@ -18,7 +18,7 @@ def send_message(message):
     data = {}
     data['payload'] = json.dumps(payload)
     print(str(data))
-    r = requests.post('https://chat.synology.com/webapi/entry.cgi?api=SYNO.Chat.External&method=incoming&version=2&token=%22tkElWrrctM0kmjFu1oX4r3IJJoDgQ79NbtGkirgH2DdR26ubpigNKGfrFu1jrC61%22', data=data)
+    r = requests.post('https://chat.synology.com/webapi/entry.cgi?api=SYNO.Chat.External&method=incoming&version=2&token=%22NRHh7inrusPrFkKDWRCAXpZ8H6ETwSAqPHmJ0dA3JY7mYpOdfDsNWWsgVoy2oEPL%22', data=data)
     print(r.text)
 
 def is_done(name):
