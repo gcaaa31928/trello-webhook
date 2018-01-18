@@ -24,7 +24,7 @@ def send_message(message):
 def is_done(name):
     return name == '完成' or name == 'Done'
 def get_card_link(card):
-    return 'https://trello.com/c/{}'.format(card['shortLink'])
+    return '<https://trello.com/c/{} | Click here>'.format(card['shortLink'])
 @app.route("/", methods=['POST'])
 def callback():
     try:
