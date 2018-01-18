@@ -32,7 +32,7 @@ def callback():
         print(body)
         action = body['action']['data']
         if is_done(action['listAfter']['name']):
-            message = '{} 已經完成 {},\n {}'.format(body['action']['display']['entities']['memberCreator']['text'], action['card']['name'], get_card_link(action['card']))
+            message = '{} 已經完成 {}\n詳細資訊： {}'.format(body['action']['display']['entities']['memberCreator']['text'], action['card']['name'], get_card_link(action['card']))
             print(message)
             send_message(message)
     except:
